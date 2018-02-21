@@ -18,6 +18,6 @@ public class SampleService {
     }
 
     public String defaultStores(String id,Throwable e) {
-        return "fail:" + e;
+        return "fail::::" + e;
     }
 }
