@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleController {
 
-    @RequestMapping("/hello/{id}")
+    @RequestMapping("/hello1/{id}")
     public String hello(@PathVariable String id) throws InterruptedException {
         System.out.println("IN !!!!!!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>!!!!!" +id);
         if ("error".equals(id)) {

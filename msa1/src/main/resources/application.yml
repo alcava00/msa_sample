@@ -11,9 +11,13 @@ hystrix.command.default.circuitBreaker.enabled: true
 hystrix.command.default.execution.timeout.enabled: true
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 1000
 hystrix.command.default.circuitBreaker.errorThresholdPercentage: 10
-hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds: 5
+hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds: 5000
+hystrix.collapser.default.maxRequestsInBatch: 5
+hystrix.command.default.metrics.rollingStats.timeInMilliseconds: 5000
+hystrix.threadpool.default.coreSize: 30
 #hystrix.command.default.circuitBreaker.forceOpen: true
 #hystrix.command.default.circuitBreaker.forceClosed: true
 logging:
-  level: debug
-#    com.netflix.hystrix: debug
+  level:
+    com.netflix.hystrix: debug
+management.security.enabled: false
