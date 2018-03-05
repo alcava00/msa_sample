@@ -23,4 +23,5 @@ hystrix.threadpool.default.coreSize: 30
 logging:
   level:
     com.netflix.hystrix: debug
+    org.springframework.session: DEBUG
 management.security.enabled: false

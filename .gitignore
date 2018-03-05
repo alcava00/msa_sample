@@ -2,3 +2,8 @@ msa1/target
 msa1/.mvn
 .idea
 msa1.iml
+api_gateway/.mvn/wrapper/maven-wrapper.jar
+api_gateway/.mvn/wrapper/maven-wrapper.properties
+bff/.mvn/wrapper/maven-wrapper.jar
+bff/.mvn/wrapper/maven-wrapper.properties
+maven-wrapper.jar

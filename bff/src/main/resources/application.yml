@@ -13,3 +13,4 @@ server:
 logging:
   level:
     com.example: DEBUG
+    org.springframework.session: DEBUG

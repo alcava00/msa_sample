@@ -72,20 +72,6 @@ public class Config {
                 log.debug(" ================================================ ");
             }
         }
-//        @Override
-//        public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-//
-//            HttpServletRequest orgRequest = ((ServletRequestAttributes) RequestContextHolder
-//                    .getRequestAttributes()).getRequest();
-//            request.getHeaders().set("SESSION", orgRequest.getHeader("SESSION"));
-//            return null;
-//        }
-        //        public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-//
-//            HttpServletRequest orgRequest = ((ServletRequestAttributes) RequestContextHolder
-//                    .getRequestAttributes()).getRequest();
-//            request.getHeaders().set("SESSION", orgRequest.getHeader("SESSION"));
-//            return null;
-//        }
+
     }
 }
