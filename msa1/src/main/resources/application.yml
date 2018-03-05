@@ -5,6 +5,9 @@ spring:
     name: msa1
   session:
     store-type: redis
+  redis:
+    host: alcava00.synology.me
+    port: 16379
 
 
 hystrix.command.default.circuitBreaker.enabled: true

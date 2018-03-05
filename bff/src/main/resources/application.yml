@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: bff
+  session:
+    store-type: redis
+    redis:
+      flush-mode: immediate
+  redis:
+    host: alcava00.synology.me
+    port: 16379
+server:
+  port: 8001
+logging:
+  level:
+    com.example: DEBUG

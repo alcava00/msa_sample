@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 7000
+ribbon:
+  eureka:
+   enabled: false
+
+zuul:
+  routes:
+    msa1: /msa1/**
+    url: http://127.0.0.1:8000
+  host:
+    socket-timeout-millis: 2000
+
+
+msa1:
+  ribbon:
+    listOfServers: http://127.0.0.1:8000
