@@ -39,21 +39,26 @@ public class SampleController {
 
         session.setAttribute("uuid",uuid);
 
-//        HttpHeaders requestHeaders = new HttpHeaders();
-//        requestHeaders.add("Cookie", "SESSION=" + session.getId());
-//        HttpEntity requestEntity = new HttpEntity(null, requestHeaders);
-//
-//        ResponseEntity rssResponse = restTemplate.exchange(
-//                "http://127.0.0.1:8000/hello/{id}",
-//                HttpMethod.GET,
-//                requestEntity,
-//                String.class,id);
-
         Thread.sleep(100);
         logger.info("In id:{},session id: {}", id, session.getId());
-//        return "hi: " + restTemplate.getForObject("http://127.0.0.1:7000/msa1/hello/{id}",String.class,id);
-        return "hi: " + restTemplate.getForObject("http://127.0.0.1:8000/hello/{id}/{uuid}", String.class, id,uuid);
+        return "hi: " + restTemplate.getForObject("http://api-gateway/msa1/hello/{id}/{uuid}", String.class, id,uuid);
+//        return "hi: " + restTemplate.getForObject("http://msa1/hello/{id}/{uuid}", String.class, id,uuid);
+//        return "hi: " + restTemplate.getForObject("http://api-gateway/hello/{id}/{uuid}", String.class, id,uuid);
 //        return "hi: " + rssResponse.getBody();
+    }
+
+    @GetMapping("/hello2/{id}")
+    public String hello2(@PathVariable String id, HttpSession session) throws URISyntaxException, InterruptedException {
+        session.setAttribute("tid", id);
+        String uuid=UUID.randomUUID().toString();
+
+        session.setAttribute("uuid",uuid);
+
+        Thread.sleep(100);
+        Map body=new HashMap();
+        body.put("tid",uuid);
+        logger.info("In id:{},session id: {}", id, session.getId());
+        return "hi: " + restTemplate.postForObject("http://api-gateway/msa1/hello/{id}/{uuid}",body, String.class, id,uuid);
     }
     public static void main(String[] args){
         String uuid=UUID.randomUUID().toString();

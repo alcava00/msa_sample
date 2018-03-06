@@ -1,21 +1,69 @@
 spring:
   application:
     name: api-gateway
+  sleuth:
+    zuul:
+      enabled: true
 
 server:
   port: 7000
-ribbon:
-  eureka:
-   enabled: false
+
+#ribbon:
+#  eureka:
+#   enabled: true
+eureka:
+#  instance:
+#      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  client:
+    region: default
+    fetch-registry: true
+    enabled: true
+    registry-fetch-interval-seconds: 4
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka/
 
 zuul:
+  ignoredServices: '*'
   routes:
-    msa1: /msa1/**
-    url: http://127.0.0.1:8000
+    msa1:
+      path: /msa1/**
+      serviceId: msa1
+      sensitive-headers:
+#      url: http://127.0.0.1:8000
+    msa2:
+      path: /msa1/hello2/**
+      serviceId: msa1
+      sensitive-headers:
+#      url: http://127.0.0.1:8000
   host:
     socket-timeout-millis: 2000
+  trace-request-body: true
 
+logging:
+  level:
+    org.springframework.cloud.netflix.eureka: debug
+    com.example.demo: debug
 
-msa1:
-  ribbon:
-    listOfServers: http://127.0.0.1:8000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+  #    listOfServers: http://127.0.0.1:8000
+hystrix:
+  threadpool:
+    default:
+      coreSize: 20
+      maximumSize: 30
+      maxQueueSize: 10
+
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+      circuitBreaker:
+        enabled: true
+        requestVolumeThreshold: 5
+        sleepWindowInMilliseconds: 5000
+        errorThresholdPercentage: 20

@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration;
 import org.springframework.web.client.RestTemplate;
@@ -36,11 +38,17 @@ public class Config {
 //    }
 
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         List<ClientHttpRequestInterceptor> ls = new ArrayList<ClientHttpRequestInterceptor>();
         ls.add(new HeaderRequestInterceptor());
         restTemplate.setInterceptors(ls);
+        HttpComponentsClientHttpRequestFactory factory
+
+                = new HttpComponentsClientHttpRequestFactory();
+        factory.setConnectTimeout(10*1000);
+        factory.setReadTimeout(10*1000);
         return restTemplate;
     }
 
